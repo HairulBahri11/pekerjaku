@@ -58,3 +58,5 @@ Route::get('/website', [App\Http\Controllers\websiteController::class, 'index'])
 Route::get('/billing', [App\Http\Controllers\websiteController::class, 'billing'])->name('home.billing');
 Route::get('/details' , [App\Http\Controllers\websiteController::class, 'details'])->name('home.details');
 Route::get('/order', [App\Http\Controllers\websiteController::class, 'order'])->name('home.order');
+Route::get('/login', [App\Http\Controllers\websiteController::class, 'login'])->name('login');
+Route::get('/register', [App\Http\Controllers\websiteController::class, 'register'])->name('register');

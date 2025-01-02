@@ -27,4 +27,15 @@ class websiteController extends Controller
         return view('website.order', compact('title'));
     }
 
+    public function login()
+    {
+        $title = "Login";
+        return view('login', compact('title'));
+    }
+
+    public function register(){
+        $title = "Register";
+        return view('register', compact('title'));
+    }
+
 }
