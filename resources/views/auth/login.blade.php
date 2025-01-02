@@ -36,7 +36,7 @@ $title = 'Login'
         <div class="card">
             <div class="card-body login-card-body" style="border-radius: 50%;">
                 <div class="text-center mb-3">
-                    <h3 style="font-weight: bold;">PERPUSTAKAAN<br> ONLINE</h3>
+                    <img src="{{ url('assets/img/logo.png')}}" alt="AdminLTE Logo" width="50%" style="opacity: .8">
                 </div>
 
                 <form action="{{ route('login') }}" method="POST">
@@ -59,13 +59,14 @@ $title = 'Login'
                     </div>
                     <div class="row mt-2">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-block btn-danger">
+                            <button type="submit" class="btn btn-block btn-primary">
                                 Login
                             </button>
                         </div>
                     </div>
                 </form>
             </div>
+            <p class="mt-4 text-center text-gray-600">Belum Punya Akun? <a href="{{ url('register') }}" class="text-primary">Register</a></p>
             <!-- /.login-card-body -->
         </div>
     </div>

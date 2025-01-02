@@ -1,6 +1,9 @@
-@extends('layouts.topbar')
+@extends('layouts.app')
 
-@php $title = 'Register' @endphp
+@php
+$title = 'Register'
+@endphp
+
 @section('content')
 @foreach($errors->all() as $error)
 <script>
@@ -13,53 +16,151 @@
 </script>
 @endforeach
 
+<div class="register-page">
+    <div class="register-box">
+        <div class="card">
+            <div class="card-body register-card-body" style="border-radius: 50%;">
+                <div class="text-center mb-3">
+                    <img src="{{ url('assets/img/logo.png')}}" alt="AdminLTE Logo" width="50%" style="opacity: .8">
+                    <!-- <h3 style="font-weight: bold;">TOKO BUAH<br> PRIMA</h3> -->
+                </div>
 
-<!-- login -->
-<div class="contain py-16">
-    <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
-        <img src="{{ url('assets/user/images/logo2.png')}}" alt="Logo" class="w-25 img-center">
-        <h2 class="text-2xl uppercase font-medium mb-1">Create an account</h2>
-        <p class="text-gray-600 mb-6 text-sm">
-            Register for new cosutumer
-        </p>
-        <form method="POST" action="{{ route('register') }}" autocomplete="off" enctype="multipart/form-data">
-            @csrf
-            <div class="space-y-2">
-                <div>
-                    <label for="name" class="text-gray-600 mb-2 block">Nama Lengkap</label>
-                    <input type="text" name="nama" id="name" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400" placeholder="fulan fulana">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h6 style="text-align: center;" class="mb-3">Silahkan Pilih Role Terlebih Dahulu</h6>
+                    </div>
+                    <div class="col-sm-12">
+                        <button id="pekerja" type="button" class="btn btn-primary mr-3 ml-4" style="font-size: 24px; padding-right: 1.5rem; padding-top: 1rem;">
+                            <i class="fas fa-users pl-2"></i>
+                            <p>
+                                &nbsp;&nbsp; Pekerja
+                            </p>
+                        </button>
+                        <button type="button" id="majikan" class="btn btn-success" style="font-size: 24px; padding-right: 1.5rem; padding-top: 1rem;">
+                            <i class="fas fa-user-tie  pl-2"></i>
+                            <p>
+                                &nbsp;&nbsp; Majikan
+                            </p>
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <label for="username" class="text-gray-600 mb-2 block">Username</label>
-                    <input type="text" name="username" id="username" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400" placeholder="riski">
-                </div>
-                <div>
-                    <label for="email" class="text-gray-600 mb-2 block">Email</label>
-                    <input type="email" name="email" id="email" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400" placeholder="youremail.@domain.com">
-                </div>
-                <div>
-                    <label for="password" class="text-gray-600 mb-2 block">Password</label>
-                    <input type="password" name="password" id="password" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400" placeholder="*******">
-                </div>
-                <div>
-                    <label for="confirm" class="text-gray-600 mb-2 block">Confirm password</label>
-                    <input type="password" name="password_confirmation" id="confirm" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-primary placeholder-gray-400" placeholder="*******">
-                </div>
-            </div>
-            <div class="mt-6">
-                <div class="flex items-center">
-                    <input type="checkbox" name="aggrement" id="aggrement" class="text-primary focus:ring-0 rounded-sm cursor-pointer">
-                    <label for="aggrement" class="text-gray-600 ml-3 cursor-pointer">I have read and agree to the <a href="#" class="text-primary">terms & conditions</a></label>
-                </div>
-            </div>
-            <div class="mt-4">
-                <button type="submit" class="block w-full py-2 text-center text-white bg-red-600 border border-primary rounded hover:bg-transparent hover:text-primary transition uppercase font-roboto font-medium">
-                    Register</button>
-            </div>
-        </form>
 
-        <p class="mt-4 text-center text-gray-600">Sudah Punya Akun? <a href="{{ url('login') }}" class="text-primary">Register</a></p>
+                <div id="pekerja">
+                    <form action="{{ route('register') }}" method="post" style="display: none;">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Full name" name="name">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Email" name="email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="inputPassword" minlength="8" name="password" class="form-control" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text" onclick="toggle('inputPassword')">
+                                    <span class="fas fa-lock" id="lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="RetypePassword" minlength="8" class="form-control" name="password_confirmation" placeholder="Confirm password">
+                            <div class="input-group-append">
+                                <div class="input-group-text" onclick="toggle1('RetypePassword')">
+                                    <span class="fas fa-lock" id="lock1"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-block btn-primary">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-center mt-2">Sudah punya akun? klik <a href="{{ url('login') }}" class="fw-bold text-primary">Login</a></p>
+                    </form>
+                </div>
+
+
+                <div id="majikan">
+                    <form action="{{ route('register') }}" method="post" style="display: none;">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Full name" name="name">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Username" name="username">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Email" name="email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="inputPassword" minlength="8" name="password" class="form-control" placeholder="Password">
+                            <div class="input-group-append">
+                                <div class="input-group-text" onclick="toggle('inputPassword')">
+                                    <span class="fas fa-lock" id="lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="password" id="RetypePassword" minlength="8" class="form-control" name="password_confirmation" placeholder="Confirm password">
+                            <div class="input-group-append">
+                                <div class="input-group-text" onclick="toggle1('RetypePassword')">
+                                    <span class="fas fa-lock" id="lock1"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-block btn-primary">
+                                    Register
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-center mt-2">Sudah punya akun? klik <a href="{{ url('login') }}" class="fw-bold text-primary">Login</a></p>
+
+                    </form>
+                </div>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
     </div>
+    <!-- /.register-box -->
 </div>
-<!-- ./login -->
+
 @endsection
