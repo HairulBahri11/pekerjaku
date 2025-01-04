@@ -66,9 +66,9 @@ class LatarBelakangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(LatarBelakangRequest $request, LatarBelakang $latarBelakang)
+    public function update(LatarBelakangRequest $request, $id)
     {
-        $latarBelakang->first()->update($request->validated());
+        LatarBelakang::find($id)->update($request->validated());
 
         return redirect()->route('latar_belakang.index')
             ->with('success', 'Update Latar Belakang Berhasil');

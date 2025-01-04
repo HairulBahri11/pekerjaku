@@ -70,6 +70,7 @@
                     </a>
                 </li>
 
+                @if(Auth::user()->role == 'admin')
                 <li class="nav-item">
                     <a href="{{url('profesi')}}" class="nav-link  {{ Request::is('*profesi*') ? 'active' : '' }}">
                         <i class="fas fa-user-tie"></i>
@@ -84,6 +85,15 @@
                         <i class="fas fa-vest"></i>
                         <p>
                             &nbsp;&nbsp; Latar Belakang
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{url('payment_method')}}" class="nav-link  {{ Request::is('*payment_method*') ? 'active' : '' }}">
+                        <i class="fas fa-university"></i>
+                        <p>
+                            &nbsp;&nbsp; Metode Pembayaran
                         </p>
                     </a>
                 </li>
@@ -105,6 +115,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
                 <li class="nav-item">
                     <a href="{{url('pemesanan')}}" class="nav-link  {{ Request::is('*pemesanan*') ? 'active' : '' }}">
@@ -123,6 +134,17 @@
                         </p>
                     </a>
                 </li>
+
+                @if(Auth::user()->role == 'admin')
+                <li class="nav-item">
+                    <a href="{{url('users')}}" class="nav-link  {{ Request::is('*users*') ? 'active' : '' }}">
+                        <i class="fas fa-user"></i>
+                        <p>
+                            &nbsp;&nbsp; User
+                        </p>
+                    </a>
+                </li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -20,6 +20,10 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
+                        <label for="exampleInputNama">Nama</label>
+                        <input type="text" class="form-control" id="exampleInputNama" name="name" placeholder="Input Nama" required value="{{$data->name}}">
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputUsername">Username</label>
                         <input type="text" class="form-control" id="exampleInputUsername" name="username" placeholder="Input Username" required value="{{$data->username}}">
                     </div>
@@ -29,14 +33,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputLevel">Level</label>
-                        <select class="custom-select rounded-0" id="exampleInputLevel" name="level" required>
-                            <option value="">--- Pilih Level ---</option>
-                            <option value="admin" {{ $data->level == 'admin' ? 'selected' : '' }}>admin</option>
-                            <option value="atasan" {{ $data->level == 'atasan' ? 'selected' : '' }}>atasan</option>
-                        </select>
+                        <label for="exampleInputNoHP">No HP</label>
+                        <input type="number" class="form-control" id="exampleInputNoHP" name="no_hp" placeholder="Input No HP" required value="{{$data->no_hp}}">
                     </div>
-                    <img width="100" height="100" src="{{url($data->photo)}}" alt="">
+
+                    <img width="100" height="100" src="{{url($data->foto)}}" alt="">
                     <div class="form-group">
                         <label for="exampleInputFile">Input Profile</label>
                         <div class="input-group">
@@ -46,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success">Simpan</button>
+                    <button type="submit" class="btn btn-danger">Simpan</button>
                 </form>
             </div>
         </div>

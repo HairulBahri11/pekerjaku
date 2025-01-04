@@ -27,16 +27,8 @@
                         <input type="text" class="form-control" id="exampleInputUsername" name="username" placeholder="Input Username" required value="{{$data->username}}">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputKelas">Kelas</label>
-                        <input type="text" class="form-control" id="exampleInputKelas" name="kelas" placeholder="Input Kelas" required value="{{$data->kelas}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputMataKuliah">Mata Kuliah</label>
-                        <input type="text" class="form-control" id="exampleInputMataKuliah" name="mata_kuliah" placeholder="Input Mata Kuliah" required value="{{$data->mata_kuliah}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputUsername">Username</label>
-                        <input type="text" class="form-control" id="exampleInputUsername" name="username" placeholder="Input Username" required value="{{$data->username}}">
+                        <label for="exampleInputNoHP">No Hp</label>
+                        <input type="text" class="form-control" id="exampleInputNoHP" name="no_hp" placeholder="Input No HP" required value="{{$data->no_hp}}">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail">Email</label>

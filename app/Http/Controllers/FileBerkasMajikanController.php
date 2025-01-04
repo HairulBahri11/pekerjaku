@@ -65,9 +65,9 @@ class FileBerkasMajikanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FileBerkasMajikanRequest $request, FileBerkasMajikan $fileBerkasMajikan)
+    public function update(FileBerkasMajikanRequest $request,  $id)
     {
-        $fileBerkasMajikan->update($request->validated());
+        FileBerkasMajikan::find($id)->update($request->validated());
 
         return redirect()->route('file-berkas-majikans.index')
             ->with('success', 'FileBerkasMajikan updated successfully');

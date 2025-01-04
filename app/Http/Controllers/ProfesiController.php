@@ -64,9 +64,9 @@ class ProfesiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProfesiRequest $request, Profesi $profesi)
+    public function update(ProfesiRequest $request,  $id)
     {
-        $profesi->first()->update($request->validated());
+        Profesi::find($id)->update($request->validated());
         return redirect()->route('profesi.index')
             ->with('success', 'Update Profesi Berhasil');
     }

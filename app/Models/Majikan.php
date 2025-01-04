@@ -30,7 +30,7 @@ class Majikan extends Model
      * @var array
      */
     protected $table = "majikan";
-    protected $fillable = ['user_id', 'alamat', 'biaya_pendaftaran', 'bukti_pembayaran', 'status'];
+    protected $fillable = ['user_id', 'alamat', 'biaya_pendaftaran', 'bukti_pembayaran', 'status', 'payment_id'];
 
 
     /**
@@ -56,6 +56,4 @@ class Majikan extends Model
     {
         return $this->hasMany(\App\Models\Pemesanan::class, 'id', 'majikan_id');
     }
-
-
 }

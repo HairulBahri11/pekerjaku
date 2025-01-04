@@ -19,10 +19,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class LatarBelakang extends Model
 {
-
-
-
-
     /**
      * Attributes that should be mass-assignable.
      *

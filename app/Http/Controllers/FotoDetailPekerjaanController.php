@@ -65,9 +65,9 @@ class FotoDetailPekerjaanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FotoDetailPekerjaanRequest $request, FotoDetailPekerjaan $fotoDetailPekerjaan)
+    public function update(FotoDetailPekerjaanRequest $request,  $id)
     {
-        $fotoDetailPekerjaan->update($request->validated());
+        FotoDetailPekerjaan::find($id)->update($request->validated());
 
         return redirect()->route('foto-detail-pekerjaans.index')
             ->with('success', 'FotoDetailPekerjaan updated successfully');

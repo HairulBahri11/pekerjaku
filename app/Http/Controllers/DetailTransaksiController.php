@@ -65,9 +65,9 @@ class DetailTransaksiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(DetailTransaksiRequest $request, DetailTransaksi $detailTransaksi)
+    public function update(DetailTransaksiRequest $request,  $id)
     {
-        $detailTransaksi->update($request->validated());
+        DetailTransaksi::find($id)->update($request->validated());
 
         return redirect()->route('detail-transaksis.index')
             ->with('success', 'DetailTransaksi updated successfully');

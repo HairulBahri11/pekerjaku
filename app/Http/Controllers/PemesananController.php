@@ -65,9 +65,9 @@ class PemesananController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PemesananRequest $request, Pemesanan $pemesanan)
+    public function update(PemesananRequest $request,  $id)
     {
-        $pemesanan->update($request->validated());
+        Pemesanan::find($id)->update($request->validated());
 
         return redirect()->route('pemesanans.index')
             ->with('success', 'Pemesanan updated successfully');

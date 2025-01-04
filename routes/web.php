@@ -46,17 +46,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('transaksi', App\Http\Controllers\TransaksiController::class);
     Route::resource('detail_transaksi', App\Http\Controllers\DetailTransaksiController::class);
     Route::resource('ulasan', App\Http\Controllers\UlasanController::class);
+    Route::resource('payment_method', App\Http\Controllers\PaymentMethodController::class);
 
     Route::get('/edit_profile/{id}', [App\Http\Controllers\UserController::class, 'edit_profile']);
     Route::post('/edit_profile_proses/{id}', [App\Http\Controllers\UserController::class, 'edit_profile_proses']);
 });
 
 Auth::routes();
+Route::post('/register_proses', [App\Http\Controllers\UserController::class, 'register_proses'])->name('register_proses');
 
 
 Route::get('/website', [App\Http\Controllers\websiteController::class, 'index'])->name('home.website');
 Route::get('/billing', [App\Http\Controllers\websiteController::class, 'billing'])->name('home.billing');
-Route::get('/details' , [App\Http\Controllers\websiteController::class, 'details'])->name('home.details');
+Route::get('/details', [App\Http\Controllers\websiteController::class, 'details'])->name('home.details');
 Route::get('/order', [App\Http\Controllers\websiteController::class, 'order'])->name('home.order');
-Route::get('/login', [App\Http\Controllers\websiteController::class, 'login'])->name('login');
-Route::get('/register', [App\Http\Controllers\websiteController::class, 'register'])->name('register');
