@@ -33,16 +33,30 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-    Route::resource('siswa', App\Http\Controllers\siswaController::class);
-    Route::resource('buku', App\Http\Controllers\bukuController::class);
-    Route::resource('peminjaman', App\Http\Controllers\peminjamanController::class);
-    Route::resource('pengembalian', App\Http\Controllers\pengembalianController::class);
-    Route::get('/kembalikan_buku/{id}', [App\Http\Controllers\pengembalianController::class, 'create'])->name('kembalikan_buku');
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('profesi',  App\Http\Controllers\ProfesiController::class);
+    Route::resource('latar_belakang',  App\Http\Controllers\LatarBelakangController::class);
+    Route::resource('majikan',  App\Http\Controllers\MajikanController::class);
+    Route::resource('file_berkas_majikan', App\Http\Controllers\FileBerkasMajikanController::class);
+    Route::resource('pekerja', App\Http\Controllers\PekerjaController::class);
+    Route::resource('foto_detail_pekerjaan',  App\Http\Controllers\FotoDetailPekerjaanController::class);
+    Route::resource('file_berkas_pekerja', App\Http\Controllers\FileBerkasPekerjaController::class);
+    Route::resource('lokasi_kerja', App\Http\Controllers\LokasiKerjaController::class);
+    Route::resource('pemesanan', App\Http\Controllers\PemesananController::class);
+    Route::resource('transaksi', App\Http\Controllers\TransaksiController::class);
+    Route::resource('detail_transaksi', App\Http\Controllers\DetailTransaksiController::class);
+    Route::resource('ulasan', App\Http\Controllers\UlasanController::class);
+    Route::resource('payment_method', App\Http\Controllers\PaymentMethodController::class);
 
     Route::get('/edit_profile/{id}', [App\Http\Controllers\UserController::class, 'edit_profile']);
     Route::post('/edit_profile_proses/{id}', [App\Http\Controllers\UserController::class, 'edit_profile_proses']);
-    Route::get('/cetak_peminjaman', [App\Http\Controllers\peminjamanController::class, 'cetak_peminjaman'])->name('cetak_peminjaman');
-    Route::get('/cetak_pengembalian', [App\Http\Controllers\pengembalianController::class, 'cetak_pengembalian'])->name('cetak_pengembalian');
 });
 
 Auth::routes();
+Route::post('/register_proses', [App\Http\Controllers\UserController::class, 'register_proses'])->name('register_proses');
+
+
+Route::get('/website', [App\Http\Controllers\websiteController::class, 'index'])->name('home.website');
+Route::get('/billing', [App\Http\Controllers\websiteController::class, 'billing'])->name('home.billing');
+Route::get('/details', [App\Http\Controllers\websiteController::class, 'details'])->name('home.details');
+Route::get('/order', [App\Http\Controllers\websiteController::class, 'order'])->name('home.order');

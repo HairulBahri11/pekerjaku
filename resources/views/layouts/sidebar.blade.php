@@ -16,14 +16,14 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" style="text-align: right">
 
-                <img src="{{url(Auth::user()->photo)}}" class="img-circle mb-2" width="35px" alt="User Image">
+                <img src="{{url(Auth::user()->foto)}}" class="img-circle mb-2" width="35px" alt="User Image">
                 <span class="ml-w">{{ Auth::user()->name }}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <a href="#" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
-                        <img src="{{url(Auth::user()->photo)}}" class="img-circle mr-3 mb-2" width="50px" alt="User Image">
+                        <img src="{{url(Auth::user()->foto)}}" class="img-circle mr-3 mb-2" width="50px" alt="User Image">
 
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -46,12 +46,12 @@
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-light-danger elevation-4" style="background-color: rgba(244,246,249,255);">
+<aside class="main-sidebar sidebar-light-primary elevation-4" style="background-color: rgba(244,246,249,255);">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link" style="text-align: center;">
         <div class="text-center mb-1">
-            <!-- <img src="{{ url('assets/img/logo.png')}}" alt="AdminLTE Logo" width="50%" style="opacity: .8"> -->
-            <h3 style="font-weight: bold;">PERPUSTAKAAN<br> ONLINE</h3>
+            <img src="{{ url('assets/img/logo.png')}}" alt="AdminLTE Logo" width="50%" style="opacity: .8">
+            <!-- <h3 style="font-weight: bold;">Pekerjaku</h3> -->
         </div>
     </a>
 
@@ -70,41 +70,81 @@
                     </a>
                 </li>
 
+                @if(Auth::user()->role == 'admin')
                 <li class="nav-item">
-                    <a href="{{url('siswa')}}" class="nav-link  {{ Request::is('*siswa*') ? 'active' : '' }}">
+                    <a href="{{url('profesi')}}" class="nav-link  {{ Request::is('*profesi*') ? 'active' : '' }}">
+                        <i class="fas fa-user-tie"></i>
+                        <p>
+                            &nbsp;&nbsp; Profesi
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{url('latar_belakang')}}" class="nav-link  {{ Request::is('*latar_belakang*') ? 'active' : '' }}">
+                        <i class="fas fa-vest"></i>
+                        <p>
+                            &nbsp;&nbsp; Latar Belakang
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{url('payment_method')}}" class="nav-link  {{ Request::is('*payment_method*') ? 'active' : '' }}">
+                        <i class="fas fa-university"></i>
+                        <p>
+                            &nbsp;&nbsp; Metode Pembayaran
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{url('majikan')}}" class="nav-link  {{ Request::is('*majikan*','*file_berkas_majikan*') ? 'active' : '' }}">
+                        <i class="fas fa-user-tie"></i>
+                        <p>
+                            &nbsp;&nbsp; Majikan
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{url('pekerja')}}" class="nav-link  {{ Request::is('*pekerja*','*foto_detail_pekerjaan*','*file_berkas_pekerja*','*lokasi_kerja*') ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <p>
-                            &nbsp;&nbsp; Siswa
+                            &nbsp;&nbsp; Pekerja
+                        </p>
+                    </a>
+                </li>
+                @endif
+
+                <li class="nav-item">
+                    <a href="{{url('pemesanan')}}" class="nav-link  {{ Request::is('*pemesanan*') ? 'active' : '' }}">
+                        <i class="fas fa-clipboard"></i>
+                        <p>
+                            &nbsp;&nbsp; Pemesanan
                         </p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{url('buku')}}" class="nav-link  {{ Request::is('*buku*') ? 'active' : '' }}">
-                        <i class="fas fa-book"></i>
+                    <a href="{{url('transaksi')}}" class="nav-link  {{ Request::is('*transaksi*','*detail_transaksi*','*ulasan*') ? 'active' : '' }}">
+                        <i class="fas fa-money-check"></i>
                         <p>
-                            &nbsp;&nbsp; Buku
+                            &nbsp;&nbsp; Transaksi
                         </p>
                     </a>
                 </li>
 
+                @if(Auth::user()->role == 'admin')
                 <li class="nav-item">
-                    <a href="{{url('peminjaman')}}" class="nav-link  {{ Request::is('*peminjaman*') ? 'active' : '' }}">
-                        <i class="fas fa-exchange-alt"></i>
+                    <a href="{{url('users')}}" class="nav-link  {{ Request::is('*users*') ? 'active' : '' }}">
+                        <i class="fas fa-user"></i>
                         <p>
-                            &nbsp;&nbsp; Peminjaman
+                            &nbsp;&nbsp; User
                         </p>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a href="{{url('pengembalian')}}" class="nav-link  {{ Request::is('*pengembalian*') ? 'active' : '' }}">
-                        <i class="fas fa-exchange-alt"></i>
-                        <p>
-                            &nbsp;&nbsp; Pengembalian
-                        </p>
-                    </a>
-                </li>
+                @endif
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Majikan;
+use App\Models\Pekerja;
 use App\Models\Profile;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -51,7 +54,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nama' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'no_hp' => ['required', 'numeric', 'max:255'],
+            'role' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -66,21 +71,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $id = mt_rand(1000, 99999);
         $user = User::create([
-            'id' => $id,
-            'email' => $data['email'],
+            'name' => $data['name'],
             'username' => $data['username'],
+            'email' => $data['email'],
+            'no_hp' => $data['no_hp'],
             'password' => Hash::make($data['password']),
-            'role' => 'Siswa',
-        ]);
-
-        $profile = Profile::create([
-            'nama' => $data['nama'],
-            'no_telp' => null,
-            'alamat' => null,
-            'foto' => 'avatar5.png',
-            'user_id' => $id
+            'role' => $data['role'],
+            'foto' => ($data['role'] == 'pekerja') ? 'assets/img/avatar.png' : 'assets/img/avatar4.png'
         ]);
 
         return $user;
