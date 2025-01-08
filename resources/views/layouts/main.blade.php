@@ -49,6 +49,7 @@
     <link rel="stylesheet" href="{{url('assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 
     <!-- sweetalert -->
+    <link rel="stylesheet" href="{{ url('assets/plugins/summernote/summernote-bs4.min.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -157,6 +158,10 @@
     <script src="{{url('assets/dist/js/adminlte.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{url('assets/dist/js/pages/dashboard.js')}}"></script>
+    <!-- Summernote -->
+    <script src="{{ url('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
+    <!-- Summernote -->
+    <script src="{{ url('assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <!-- DataTables  & Plugins -->
     <script src="{{url('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -201,6 +206,18 @@
                 }
             });
         }
+
+
+        $(function() {
+            // Summernote
+            $('.summernote').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+        })
 
         function prosesData(event, el, pesan, status) {
             event.preventDefault();

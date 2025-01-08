@@ -16,10 +16,10 @@ class MajikanController extends Controller
      */
     public function index()
     {
-        $majikans = Majikan::paginate();
+        $majikans = Majikan::orderBy('created_at', 'desc')->get();
+        $title = 'Data Majikan';
 
-        return view('majikan.index', compact('majikans'))
-            ->with('i', (request()->input('page', 1) - 1) * $majikans->perPage());
+        return view('majikan.index', compact('majikans', 'title'));
     }
 
     /**
@@ -58,16 +58,18 @@ class MajikanController extends Controller
     public function edit($id)
     {
         $majikan = Majikan::find($id);
+        $title = 'Data Majikan';
 
-        return view('majikan.edit', compact('majikan'));
+
+        return view('majikan.edit', compact('majikan', 'title'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(MajikanRequest $request, Majikan $majikan)
+    public function update(MajikanRequest $request,  $id)
     {
-        $majikan->update($request->validated());
+        Majikan::find($id)->update($request->validated());
 
         return redirect()->route('majikans.index')
             ->with('success', 'Majikan updated successfully');

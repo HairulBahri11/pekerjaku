@@ -65,9 +65,9 @@ class UlasanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UlasanRequest $request, Ulasan $ulasan)
+    public function update(UlasanRequest $request,  $id)
     {
-        $ulasan->update($request->validated());
+        Ulasan::find($id)->update($request->validated());
 
         return redirect()->route('ulasans.index')
             ->with('success', 'Ulasan updated successfully');

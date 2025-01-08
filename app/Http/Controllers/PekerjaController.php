@@ -65,9 +65,9 @@ class PekerjaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(PekerjaRequest $request, Pekerja $pekerja)
+    public function update(PekerjaRequest $request, $id)
     {
-        $pekerja->update($request->validated());
+        Pekerja::find($id)->update($request->validated());
 
         return redirect()->route('pekerjas.index')
             ->with('success', 'Pekerja updated successfully');

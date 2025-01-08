@@ -65,9 +65,9 @@ class LokasiKerjaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(LokasiKerjaRequest $request, LokasiKerja $lokasiKerja)
+    public function update(LokasiKerjaRequest $request,  $id)
     {
-        $lokasiKerja->update($request->validated());
+        LokasiKerja::find($id)->update($request->validated());
 
         return redirect()->route('lokasi-kerjas.index')
             ->with('success', 'LokasiKerja updated successfully');

@@ -19,12 +19,3 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-//API Product
-Route::get('/product', [ProductController::class, 'index']);
-Route::get('/product/{id}', [ProductController::class, 'show']);
-
-// API Favorit
-Route::get('/favorit', [FavoritController::class, 'index']);
-Route::get('/favorit/{id}', [FavoritController::class, 'show']);
-Route::post('/favorit-create', [FavoritController::class, 'store']);
-Route::delete('/favorit/{id}', [FavoritController::class, 'destroy']);

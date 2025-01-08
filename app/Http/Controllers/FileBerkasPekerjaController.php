@@ -65,9 +65,9 @@ class FileBerkasPekerjaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(FileBerkasPekerjaRequest $request, FileBerkasPekerja $fileBerkasPekerja)
+    public function update(FileBerkasPekerjaRequest $request,  $id)
     {
-        $fileBerkasPekerja->update($request->validated());
+        FileBerkasPekerja::find($id)->update($request->validated());
 
         return redirect()->route('file-berkas-pekerjas.index')
             ->with('success', 'FileBerkasPekerja updated successfully');

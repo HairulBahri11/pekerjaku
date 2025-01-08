@@ -65,9 +65,9 @@ class TransaksiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TransaksiRequest $request, Transaksi $transaksi)
+    public function update(TransaksiRequest $request,  $id)
     {
-        $transaksi->update($request->validated());
+        Transaksi::find($id)->update($request->validated());
 
         return redirect()->route('transaksis.index')
             ->with('success', 'Transaksi updated successfully');
