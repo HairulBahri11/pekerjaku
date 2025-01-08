@@ -1,34 +1,6 @@
 @extends('website.layout')
 @section('content')
 <main>
-    <!--Banner Area Start -->
-    <section class="banner-area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 order-2 order-lg-1">
-                    <div class="banner-area__content">
-                        <h2>Temukan Pekerja Berkualitas untuk Bisnis Anda</h2>
-                        <p>
-                            Jaringan luas, pilihan beragam, dan solusi tepat untuk setiap<br> proyek Anda.
-                        </p>
-                        <a class="btn bg-primary" href="#">Cari Pekerja</a>
-                    </div>
-                </div>
-                <div class="col-lg-6 order-1 order-lg-2">
-                    <div class="banner-area__img">
-                        <img src="{{ asset('assets/img/img_2.jpg') }}" alt="banner-img"
-                            class="img-fluid" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--Banner Area End -->
-
-    <!-- Features Section Start -->
-
-    <!-- Features Section End -->
-
     <!-- About Area Start -->
     <section class="search">
         <div class="container">
@@ -96,7 +68,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="section-title">
-                        <h2>Pekerja Popular</h2>
+                        <h2>Profesi {{$title}}</h2>
                     </div>
                 </div>
             </div>
@@ -120,5 +92,11 @@
             </div>
         </div>
     </section>
+    <!-- Populer Product End -->
+    <!-- Categorys Section End -->
+
+    <!-- Features Section Start -->
+
+    <!-- Features Section End -->
 </main>
 @endsection

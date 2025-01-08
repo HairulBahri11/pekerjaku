@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('biaya_pendaftaran');
             $table->string('bukti_pembayaran');
-            $table->enum('status', ['active', 'in-active']);
+            $table->enum('status', ['active', 'in-active','proccess']);
             $table->timestamps();
         });
     }
