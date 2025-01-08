@@ -47,7 +47,7 @@ class Pekerja extends Model
      * @var array
      */
     protected $table = "pekerja";
-    protected $fillable = ['user_id', 'latar_belakang_id', 'profesi_id', 'total_pengalaman', 'pendidikan_terakhir', 'gaji_bulanan', 'tgl_lahir', 'agama', 'deskripsi', 'tinggi', 'berat', 'suku', 'status', 'status_pribadi', 'status_active'];
+    protected $fillable = ['user_id', 'latar_belakang_id', 'profesi_id', 'total_pengalaman', 'pendidikan_terakhir', 'gaji_bulanan', 'tgl_lahir', 'agama', 'deskripsi', 'tinggi', 'berat', 'suku', 'status', 'status_pribadi', 'status_active', 'keterampilan'];
 
 
     /**
@@ -79,7 +79,16 @@ class Pekerja extends Model
      */
     public function detailTransaksis()
     {
-        return $this->hasMany(\App\Models\DetailTransaksi::class, 'id', 'pekerja_id');
+        return $this->hasMany(\App\Models\DetailTransaksi::class, 'pekerja_id', 'id');
+    }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function fileBerkasPekerjas()
+    {
+        return $this->hasMany(\App\Models\FileBerkasPekerja::class, 'pekerja_id', 'id');
     }
 
     /**
@@ -87,7 +96,7 @@ class Pekerja extends Model
      */
     public function fotoDetailPekerjaans()
     {
-        return $this->hasMany(\App\Models\FotoDetailPekerjaan::class, 'id', 'pekerja_id');
+        return $this->hasMany(\App\Models\FotoDetailPekerjaan::class, 'pekerja_id', 'id');
     }
 
     /**
@@ -95,8 +104,6 @@ class Pekerja extends Model
      */
     public function lokasiKerjas()
     {
-        return $this->hasMany(\App\Models\LokasiKerja::class, 'id', 'pekerja_id');
+        return $this->hasMany(\App\Models\LokasiKerja::class, 'pekerja_id', 'id');
     }
-
-
 }

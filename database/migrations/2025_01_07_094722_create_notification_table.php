@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('file_berkas_pekerja', function (Blueprint $table) {
+        Schema::create('notification', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pekerja_id')->nullable();
-            $table->foreign('pekerja_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('nama_berkas');
-            $table->string('lokasi');
+            $table->string('jenis');
+            $table->text('pesan');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('file_berkas_majikan');
+        Schema::dropIfExists('notification');
     }
 };

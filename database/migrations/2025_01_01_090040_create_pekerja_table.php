@@ -29,8 +29,8 @@ return new class extends Migration
             $table->integer('berat');
             $table->string('suku');
             $table->enum('status', ['tersedia', 'segera_tersedia', 'infal']);
-            $table->enum('status_pribadi', ['Menikah', 'Belum_Menikah', 'Janda', 'Duda']);
-            $table->enum('status_active', ['active', 'in-active']);
+            $table->enum('status_pribadi', ['Menikah', 'Belum Menikah', 'Janda', 'Duda']);
+            $table->enum('status_active', ['active', 'in-active', 'proccess']);
             $table->timestamps();
         });
     }

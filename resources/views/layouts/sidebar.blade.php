@@ -29,6 +29,7 @@
                             <h3 class="dropdown-item-title">
                                 {{ Auth::user()->name }}
                             </h3>
+                            <p class="text-sm"> <b>{{ Auth::user()->role }} </b></p>
                         </div>
                     </div>
                     <!-- Message End -->
@@ -48,7 +49,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light-primary elevation-4" style="background-color: rgba(244,246,249,255);">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link" style="text-align: center;">
+    <a href="#" class="brand-link" style="text-align: center;">
         <div class="text-center mb-1">
             <img src="{{ url('assets/img/logo.png')}}" alt="AdminLTE Logo" width="50%" style="opacity: .8">
             <!-- <h3 style="font-weight: bold;">Pekerjaku</h3> -->
@@ -117,6 +118,7 @@
                 </li>
                 @endif
 
+                @if(Auth::user()->role != 'pekerja')
                 <li class="nav-item">
                     <a href="{{url('pemesanan')}}" class="nav-link  {{ Request::is('*pemesanan*') ? 'active' : '' }}">
                         <i class="fas fa-clipboard"></i>
@@ -125,6 +127,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
                 <li class="nav-item">
                     <a href="{{url('transaksi')}}" class="nav-link  {{ Request::is('*transaksi*','*detail_transaksi*','*ulasan*') ? 'active' : '' }}">

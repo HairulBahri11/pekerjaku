@@ -36,10 +36,8 @@ class FileBerkasPekerja extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function pekerja()
     {
-        return $this->belongsTo(\App\Models\User::class, 'pekerja_id', 'id');
+        return $this->belongsTo(\App\Models\Pekerja::class, 'pekerja_id', 'id');
     }
-
-
 }

@@ -27,9 +27,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return redirect('login');
-});;
+Route::get('/', [App\Http\Controllers\websiteController::class, 'index'])->name('home.website');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
@@ -37,8 +35,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('profesi',  App\Http\Controllers\ProfesiController::class);
     Route::resource('latar_belakang',  App\Http\Controllers\LatarBelakangController::class);
     Route::resource('majikan',  App\Http\Controllers\MajikanController::class);
+    Route::post('/aktif_majikan/{id}', [App\Http\Controllers\MajikanController::class, 'aktif_majikan'])->name('aktif_majikan');
     Route::resource('file_berkas_majikan', App\Http\Controllers\FileBerkasMajikanController::class);
     Route::resource('pekerja', App\Http\Controllers\PekerjaController::class);
+    Route::post('/aktif_pekerja/{id}', [App\Http\Controllers\PekerjaController::class, 'aktif_pekerja'])->name('aktif_pekerja');
     Route::resource('foto_detail_pekerjaan',  App\Http\Controllers\FotoDetailPekerjaanController::class);
     Route::resource('file_berkas_pekerja', App\Http\Controllers\FileBerkasPekerjaController::class);
     Route::resource('lokasi_kerja', App\Http\Controllers\LokasiKerjaController::class);
@@ -50,12 +50,24 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/edit_profile/{id}', [App\Http\Controllers\UserController::class, 'edit_profile']);
     Route::post('/edit_profile_proses/{id}', [App\Http\Controllers\UserController::class, 'edit_profile_proses']);
+
+    Route::post('/edit_profile_majikan_proses/{id}', [App\Http\Controllers\UserController::class, 'edit_profile_majikan_proses']);
+
+    Route::post('/edit_profile_pekerja_proses/{id}', [App\Http\Controllers\UserController::class, 'edit_profile_pekerja_proses']);
+    Route::get('/hapus_gallery/{id}', [App\Http\Controllers\UserController::class, 'hapus_gallery'])->name('hapus_gallery');
+    Route::post('/hapus_berkas_pekerja', [App\Http\Controllers\UserController::class, 'hapus_berkas_pekerja'])->name('hapus_berkas_pekerja');
+    Route::post('/hapus_berkas_majikan', [App\Http\Controllers\UserController::class, 'hapus_berkas_majikan'])->name('hapus_berkas_majikan');
+    Route::post('/hapus_notif', [App\Http\Controllers\HomeController::class, 'hapus_notif'])->name('hapus_notif');
 });
 
 Auth::routes();
 Route::post('/register_proses', [App\Http\Controllers\UserController::class, 'register_proses'])->name('register_proses');
+Route::post('/register_proses', [App\Http\Controllers\UserController::class, 'register_proses'])->name('register_proses');
 
 
+Route::get('/home_latar_belakang/{id}', [App\Http\Controllers\websiteController::class, 'home_latar_belakang'])->name('home_latar_belakang');
+Route::get('/home_profesi/{id}', [App\Http\Controllers\websiteController::class, 'home_profesi'])->name('home_profesi');
+Route::get('/pekerja_detail/{id}', [App\Http\Controllers\websiteController::class, 'pekerja_detail'])->name('pekerja_detail');
 Route::get('/website', [App\Http\Controllers\websiteController::class, 'index'])->name('home.website');
 Route::get('/billing', [App\Http\Controllers\websiteController::class, 'billing'])->name('home.billing');
 Route::get('/details', [App\Http\Controllers\websiteController::class, 'details'])->name('home.details');
