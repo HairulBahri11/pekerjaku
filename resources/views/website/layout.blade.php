@@ -5,8 +5,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Olog - Home</title>
+    <title>{{ $title }}</title>
     <link rel="stylesheet" href="{{ asset('temp-website/dist/main.css') }}" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{url('assets/plugins/fontawesome-free/css/all.min.css')}}">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!-- datatables -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -54,24 +74,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="header-top-switcher">
-                                <div class="language">
-                                    <select>
-                                        <option data-display="English">English</option>
-                                        <option value="1">Arabic</option>
-                                        <option value="2">Aramaic</option>
-                                        <option value="4">Bangla</option>
-                                    </select>
-                                </div>
-                                <div class="currency">
-                                    <select>
-                                        <option data-display="Currency">USD</option>
-                                        <option value="1">BDT</option>
-                                        <option value="2">SNG</option>
-                                        <option value="4">ERU</option>
-                                    </select>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,15 +84,12 @@
                 <div class="d-none d-lg-block">
                     <nav class="menu-area d-flex align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="dist/images/logo/logo.png" alt="logo" /></a>
+                            <a href="#"><img src="{{ url('assets/img/logo.png')}}" width="100" alt="logo" /></a>
                         </div>
                         <ul class="main-menu d-flex align-items-center">
-                            <li><a class="active" href="index.html">Home</a></li>
-                            <li><a href="shop.html">Men</a></li>
-                            <li><a href="shop.html">Women</a></li>
-                            <li><a href="shop.html">Shop</a></li>
+                            <li><a class="{{  $title == 'Home' ? 'active' : ''}}" href="{{route('home.website')}}">Home</a></li>
                             <li>
-                                <a href="javascript:void(0)">Category
+                                <a href="javascript:void(0)" class="{{   Request::is('*home_latar_belakang*')  ? 'active' : ''}}">Latar Belakang
                                     <svg xmlns="http://www.w3.org/2000/svg" width="9.98" height="5.69"
                                         viewBox="0 0 9.98 5.69">
                                         <g id="Arrow" transform="translate(0.99 0.99)">
@@ -100,18 +99,33 @@
                                         </g>
                                     </svg>
                                 </a>
+                                <?php $latarBelakang = App\Models\LatarBelakang::orderBy('created_at', 'desc')->get() ?>
                                 <ul class="sub-menu">
-                                    <li><a href="javascript:void(0)">Category 1</a></li>
-                                    <li><a href="javascript:void(0)">Category 2</a></li>
-                                    <li><a href="javascript:void(0)">Category 3</a></li>
-                                    <li><a href="javascript:void(0)">Category 4</a></li>
-                                    <li><a href="javascript:void(0)">Category 5</a></li>
+                                    @foreach($latarBelakang as $lb)
+                                    <li><a href="{{route('home_latar_belakang', $lb->id)}}">{{$lb->latar_belakang}}</a></li>
+                                    @endforeach
+                                </ul>
+                            <li>
+                                <a href="javascript:void(0)" class="{{   Request::is('*home_profesi*')  ? 'active' : ''}}">Profesi
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="9.98" height="5.69"
+                                        viewBox="0 0 9.98 5.69">
+                                        <g id="Arrow" transform="translate(0.99 0.99)">
+                                            <path id="Arrow-2" data-name="Arrow" d="M1474.286,26.4l4,4,4-4"
+                                                transform="translate(-1474.286 -26.4)" fill="none" stroke="#1a2224"
+                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" />
+                                        </g>
+                                    </svg>
+                                </a>
+                                <?php $profesi = App\Models\Profesi::orderBy('created_at', 'desc')->get() ?>
+                                <ul class="sub-menu">
+                                    @foreach($profesi as $p)
+                                    <li><a href="{{route('home_profesi', $p->id)}}">{{$p->profesi}}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
-                            <li><a href="javascript:void(0)">Sales</a></li>
                         </ul>
                         <div class="search-bar">
-                            <input type="text" placeholder="Search for product..." />
+                            <input type="text" placeholder="Search Worker..." />
                             <div class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20.414" height="20.414"
                                     viewBox="0 0 20.414 20.414">
@@ -129,59 +143,17 @@
                         <div class="menu-icon ml-auto">
                             <ul>
                                 <li>
-                                    <a href="wishlist.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20"
-                                            viewBox="0 0 22 20">
-                                            <g id="Heart" transform="translate(1 1)">
-                                                <path id="Heart-2" data-name="Heart"
-                                                    d="M20.007,4.59a5.148,5.148,0,0,0-7.444,0L11.548,5.636,10.534,4.59a5.149,5.149,0,0,0-7.444,0,5.555,5.555,0,0,0,0,7.681L4.1,13.317,11.548,21l7.444-7.681,1.014-1.047a5.553,5.553,0,0,0,0-7.681Z"
-                                                    transform="translate(-1.549 -2.998)" fill="#fff"
-                                                    stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                            </g>
+                                    @if(Auth::user())
+                                    <a href="{{route('dashboard')}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                            <path d="M280.4 148.3L96 300.1V464a16 16 0 0 0 16 16l112.1-.3a16 16 0 0 0 15.9-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.6a16 16 0 0 0 16 16.1L464 480a16 16 0 0 0 16-16V300L295.7 148.3a12.2 12.2 0 0 0 -15.3 0zM571.6 251.5L488 182.6V44.1a12 12 0 0 0 -12-12h-56a12 12 0 0 0 -12 12v72.6L318.5 43a48 48 0 0 0 -61 0L4.3 251.5a12 12 0 0 0 -1.6 16.9l25.5 31A12 12 0 0 0 45.2 301l235.2-193.7a12.2 12.2 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0 -1.7-16.9z" />
                                         </svg>
-                                        <span class="heart">3</span>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="cart.html"><svg xmlns="http://www.w3.org/2000/svg" width="22"
-                                            height="22" viewBox="0 0 22 22">
-                                            <g id="Icon" transform="translate(-1524 -89)">
-                                                <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.909"
-                                                    cy="0.952" rx="0.909" ry="0.952"
-                                                    transform="translate(1531.364 108.095)" fill="none"
-                                                    stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                                <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.909"
-                                                    cy="0.952" rx="0.909" ry="0.952"
-                                                    transform="translate(1541.364 108.095)" fill="none"
-                                                    stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                                <path id="Path_3" data-name="Path 3"
-                                                    d="M1,1H4.636L7.073,13.752a1.84,1.84,0,0,0,1.818,1.533h8.836a1.84,1.84,0,0,0,1.818-1.533L21,5.762H5.545"
-                                                    transform="translate(1524 89)" fill="none" stroke="#1a2224"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                            </g>
-                                        </svg>
-                                        <span class="cart">3</span>
+                                    @else
+                                    <a href="{{route('dashboard')}}" style="color:#000;">
+                                        Login/Register
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="account.html"><svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                            height="20" viewBox="0 0 18 20">
-                                            <g id="Account" transform="translate(1 1)">
-                                                <path id="Path_86" data-name="Path 86"
-                                                    d="M20,21V19a4,4,0,0,0-4-4H8a4,4,0,0,0-4,4v2"
-                                                    transform="translate(-4 -3)" fill="none" stroke="#000"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                                <circle id="Ellipse_9" data-name="Ellipse 9" cx="4"
-                                                    cy="4" r="4" transform="translate(4)" fill="#fff"
-                                                    stroke="#000" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                            </g>
-                                        </svg></a>
+                                    @endif
                                 </li>
                             </ul>
                         </div>
@@ -195,7 +167,7 @@
                                 onclick="closeNav()">&times;</a>
                         </div>
                         <div class="search-bar">
-                            <input type="text" placeholder="Search for product..." />
+                            <input type="text" placeholder="Search Worker..." />
                             <div class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20.414" height="20.414"
                                     viewBox="0 0 20.414 20.414">
@@ -210,12 +182,8 @@
                                 </svg>
                             </div>
                         </div>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="shop.html">Men</a></li>
-                        <li><a href="shop.html">Women</a></li>
-                        <li><a href="shop.html">Shop</a></li>
                         <li>
-                            <a href="javascript:void(0)">Category
+                            <a href="javascript:void(0)" class="{{   Request::is('*home_latar_belakang*')  ? 'active' : ''}}">Latar Belakang
                                 <svg xmlns="http://www.w3.org/2000/svg" width="9.98" height="5.69"
                                     viewBox="0 0 9.98 5.69">
                                     <g id="Arrow" transform="translate(0.99 0.99)">
@@ -225,23 +193,42 @@
                                     </g>
                                 </svg>
                             </a>
+                            <?php $latarBelakang = App\Models\LatarBelakang::orderBy('created_at', 'desc')->get() ?>
                             <ul class="sub-menu">
-                                <li><a href="javascript:void(0)">Category 1</a></li>
-                                <li><a href="javascript:void(0)">Category 2</a></li>
-                                <li><a href="javascript:void(0)">Category 3</a></li>
-                                <li><a href="javascript:void(0)">Category 4</a></li>
-                                <li><a href="javascript:void(0)">Category 5</a></li>
+                                @foreach($latarBelakang as $lb)
+                                <li><a href="{{route('home_latar_belakang', $lb->id)}}">{{$lb->latar_belakang}}</a></li>
+                                @endforeach
+                            </ul>
+                        <li>
+                            <a href="javascript:void(0)" class="{{   Request::is('*home_profesi*')  ? 'active' : ''}}">Profesi
+                                <svg xmlns="http://www.w3.org/2000/svg" width="9.98" height="5.69"
+                                    viewBox="0 0 9.98 5.69">
+                                    <g id="Arrow" transform="translate(0.99 0.99)">
+                                        <path id="Arrow-2" data-name="Arrow" d="M1474.286,26.4l4,4,4-4"
+                                            transform="translate(-1474.286 -26.4)" fill="none" stroke="#1a2224"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" />
+                                    </g>
+                                </svg>
+                            </a>
+                            <?php $profesi = App\Models\Profesi::orderBy('created_at', 'desc')->get() ?>
+                            <ul class="sub-menu">
+                                @foreach($profesi as $p)
+                                <li><a href="{{route('home_profesi', $p->id)}}">{{$p->profesi}}</a></li>
+                                @endforeach
                             </ul>
                         </li>
-                        <li><a href="javascript:void(0)">Sales</a></li>
                     </div>
                     <div class="mobile-nav d-flex align-items-center justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="dist/images/logo/logo.png" alt="logo" /></a>
+                            <a href="#"><img src="{{ url('assets/img/logo.png')}}" width="100" alt="logo" /></a>
                         </div>
                         <div class="search-bar">
-                            <input type="text" placeholder="Search for product..." />
+                            <input type="text" placeholder="Search Worker..." />
                             <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                    <path d="M280.4 148.3L96 300.1V464a16 16 0 0 0 16 16l112.1-.3a16 16 0 0 0 15.9-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.6a16 16 0 0 0 16 16.1L464 480a16 16 0 0 0 16-16V300L295.7 148.3a12.2 12.2 0 0 0 -15.3 0zM571.6 251.5L488 182.6V44.1a12 12 0 0 0 -12-12h-56a12 12 0 0 0 -12 12v72.6L318.5 43a48 48 0 0 0 -61 0L4.3 251.5a12 12 0 0 0 -1.6 16.9l25.5 31A12 12 0 0 0 45.2 301l235.2-193.7a12.2 12.2 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0 -1.7-16.9z" />
+                                </svg>
+
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20.414" height="20.414"
                                     viewBox="0 0 20.414 20.414">
                                     <g id="Search_Icon" data-name="Search Icon" transform="translate(1 1)">
@@ -258,62 +245,17 @@
                         <div class="menu-icon">
                             <ul>
                                 <li>
-                                    <a href="wishlist.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20"
-                                            viewBox="0 0 22 20">
-                                            <g id="Heart" transform="translate(1 1)">
-                                                <path id="Heart-2" data-name="Heart"
-                                                    d="M20.007,4.59a5.148,5.148,0,0,0-7.444,0L11.548,5.636,10.534,4.59a5.149,5.149,0,0,0-7.444,0,5.555,5.555,0,0,0,0,7.681L4.1,13.317,11.548,21l7.444-7.681,1.014-1.047a5.553,5.553,0,0,0,0-7.681Z"
-                                                    transform="translate(-1.549 -2.998)" fill="#fff"
-                                                    stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                            </g>
-                                        </svg>
-                                        <span class="heart">3</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="cart.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
-                                            viewBox="0 0 22 22">
-                                            <g id="Icon" transform="translate(-1524 -89)">
-                                                <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.909"
-                                                    cy="0.952" rx="0.909" ry="0.952"
-                                                    transform="translate(1531.364 108.095)" fill="none"
-                                                    stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                                <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.909"
-                                                    cy="0.952" rx="0.909" ry="0.952"
-                                                    transform="translate(1541.364 108.095)" fill="none"
-                                                    stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                                <path id="Path_3" data-name="Path 3"
-                                                    d="M1,1H4.636L7.073,13.752a1.84,1.84,0,0,0,1.818,1.533h8.836a1.84,1.84,0,0,0,1.818-1.533L21,5.762H5.545"
-                                                    transform="translate(1524 89)" fill="none" stroke="#1a2224"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                            </g>
-                                        </svg>
-                                        <span class="cart">3</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="account.html">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20"
-                                            viewBox="0 0 18 20">
-                                            <g id="Account" transform="translate(1 1)">
-                                                <path id="Path_86" data-name="Path 86"
-                                                    d="M20,21V19a4,4,0,0,0-4-4H8a4,4,0,0,0-4,4v2"
-                                                    transform="translate(-4 -3)" fill="none" stroke="#000"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                                <circle id="Ellipse_9" data-name="Ellipse 9" cx="4"
-                                                    cy="4" r="4" transform="translate(4)" fill="#fff"
-                                                    stroke="#000" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" />
-                                            </g>
+                                    @if(Auth::user())
+                                    <a href="{{route('dashboard')}}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                            <path d="M280.4 148.3L96 300.1V464a16 16 0 0 0 16 16l112.1-.3a16 16 0 0 0 15.9-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.6a16 16 0 0 0 16 16.1L464 480a16 16 0 0 0 16-16V300L295.7 148.3a12.2 12.2 0 0 0 -15.3 0zM571.6 251.5L488 182.6V44.1a12 12 0 0 0 -12-12h-56a12 12 0 0 0 -12 12v72.6L318.5 43a48 48 0 0 0 -61 0L4.3 251.5a12 12 0 0 0 -1.6 16.9l25.5 31A12 12 0 0 0 45.2 301l235.2-193.7a12.2 12.2 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0 -1.7-16.9z" />
                                         </svg>
                                     </a>
+                                    @else
+                                    <a href="{{route('dashboard')}}" style="color:#000;">
+                                        Login/Register
+                                    </a>
+                                    @endif
                                 </li>
                             </ul>
                         </div>

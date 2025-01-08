@@ -59,21 +59,90 @@
                         </div>
                     </div>
 
-                    <img width="100" height="100" src="{{url($data->photo)}}" alt="">
+                    <img width="100" height="100" src="{{url($data->foto)}}" alt="">
                     <div class="form-group">
                         <label for="exampleInputFile">Input Profile</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="photo" id="exampleInputFile">
+                                <input type="file" class="custom-file-input" name="foto" id="exampleInputFile">
                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Simpan</button>
+                    <div class="form-group d-flex" style="position: relative; left:1rem;">
+                        <button type="button" class="btn btn-danger mr-2" data-toggle="modal" data-target="#tolakModal"><i class="fas fa-window-close"></i> Tolak</button>
+                        <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#nonAktifkanModal"><i class="fas fa-times-circle"></i> Non-Aktifkan</button>
+                        <a class="btn btn-success" onclick="prosesData(event, this,'Apakah anda yakin meng-aktifkan akun ini?')" href="{{route('aktif_pekerja', $pekerja->id)}}"><i class="fas fa-check-circle"></i> Terima & Aktifkan</a>
+                    </div>
                 </form>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="tolakModal" tabindex="-1" aria-labelledby="tolakModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tolakModal"> <i class="fas fa-window-close"></i> Alasan Ditolak</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{route('pekerja.update',$pekerja->id)}}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="status" value="in-active">
+                        <input type="hidden" name="jenis" value="tolak">
+                        <textarea id="Alasan" name="alasan" class="summernote" required>
+                        </textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Tolak</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="nonAktifkanModal" tabindex="-1" aria-labelledby="nonAktifkanModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nonAktifkanModal"><i class="fas fa-times-circle"></i> Alasan Di Non-aktifkan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{route('pekerja.update',$pekerja->id)}}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="status" value="in-active">
+                        <input type="hidden" name="jenis" value="non-active">
+                        <textarea id="Alasan" name="alasan" class="summernote" required>
+                        </textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-warning">Non-Aktif</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 @endsection

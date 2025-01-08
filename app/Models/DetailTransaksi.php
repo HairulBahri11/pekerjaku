@@ -52,6 +52,6 @@ class DetailTransaksi extends Model
      */
     public function ulasans()
     {
-        return $this->hasMany(\App\Models\Ulasan::class, 'id', 'detail_transaksi_id');
+        return $this->hasMany(\App\Models\Ulasan::class, 'detail_transaksi_id', 'id');
     }
 }

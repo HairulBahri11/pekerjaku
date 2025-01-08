@@ -46,7 +46,7 @@ class Majikan extends Model
      */
     public function fileBerkasMajikans()
     {
-        return $this->hasMany(\App\Models\FileBerkasMajikan::class, 'id', 'majikan_id');
+        return $this->hasMany(\App\Models\FileBerkasMajikan::class, 'majikan_id', 'id');
     }
 
     /**
@@ -54,6 +54,6 @@ class Majikan extends Model
      */
     public function pemesanans()
     {
-        return $this->hasMany(\App\Models\Pemesanan::class, 'id', 'majikan_id');
+        return $this->hasMany(\App\Models\Pemesanan::class, 'majikan_id', 'id');
     }
 }

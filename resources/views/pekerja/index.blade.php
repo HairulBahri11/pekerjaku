@@ -39,13 +39,17 @@
                             <td>{{ $data->profesi?->profesi }}</td>
                             <td>{{ $data->user?->no_hp }}</td>
                             <td>{{ $data->user?->email }}</td>
-                            @if( $data->status == 'active')
-                            <td><span class="badge badge-success">Active</span></td>
-                            @else
-                            <td><span class="badge badge-danger">Non Active</span></td>
-                            @endif
+                            <td>
+                                @if( $data->status_active == 'active')
+                                <span class="badge badge-success">Active</span>
+                                @elseif( $data->status_active == 'in-active')
+                                <span class="badge badge-danger">Non Active</span>
+                                @else
+                                <span class="badge badge-warning">Proccess</span>
+                                @endif
+                            </td>
                             <td style="width: 230px;">
-                                <a class="btn btn-info btn-sm mt-1" type="button" onclick="<?= route('pekerja.edit', $data->id) ?>"><i class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit</a>
+                                <a class="btn btn-info btn-sm mt-1" type="button" href="<?= route('pekerja.show', $data->id) ?>"><i class="fas fa-eye"></i>&nbsp;&nbsp;Detail</a>
                                 <a class="btn btn-danger btn-sm mt-1" onclick="notificationforDelete(event, this)" href="{{route('pekerja.destroy',$data->id)}}"><i class="fas fa-trash"></i>&nbsp;&nbsp; Delete</a>
                             </td>
                         </tr>
